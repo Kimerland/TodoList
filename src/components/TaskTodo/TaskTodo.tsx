@@ -1,7 +1,20 @@
 import "./TaskTodo.css";
 import "../../App.css";
+import { FC } from "react";
+import { ITask } from "../../hooks/useTodo";
 
-const TaskTodo = ({
+export interface TaskTodoProps {
+  tasks: ITask[];
+  delTask: (id: number) => void;
+  toogleTask: (id: number) => void;
+  editTask: (id: number, value: string) => void;
+  saveTask: (id: number) => void;
+  editValue: string;
+  setEditValue: (value: string) => void;
+  editingId: number | null;
+}
+
+const TaskTodo: FC<TaskTodoProps> = ({
   tasks,
   delTask,
   toogleTask,
@@ -29,7 +42,9 @@ const TaskTodo = ({
                   value={editValue}
                   onChange={(e) => setEditValue(e.target.value)}
                 />
-                <button className="btn-edit" onClick={() => saveTask(el.id)}>Save</button>
+                <button className="btn-edit" onClick={() => saveTask(el.id)}>
+                  Save
+                </button>
               </>
             ) : (
               <>
